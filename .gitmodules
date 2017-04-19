@@ -1,0 +1,6 @@
+[submodule "vicious"]
+	path = vicious
+	url = ./vicious
+[submodule "arc-icon-theme"]
+	path = arc-icon-theme
+	url = ./arc-icon-theme
