@@ -13,6 +13,7 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 
 local vicious = require("vicious")
 
+
 -- Load Debian menu entries
 require("debian.menu")
 
@@ -188,55 +189,25 @@ memwidget = wibox.widget.textbox()
 -- Register widget
 vicious.register(memwidget, vicious.widgets.mem, " RAM: $2MB")
 
--- Initialize widget
-cpuwidget = wibox.widget.textbox()
--- Register widget
-vicious.register(cpuwidget, vicious.widgets.cpu, "CPU: $1%")
 
--- Initialize widget
+-- Date
 datewidget = wibox.widget.textbox()
--- Register widget
 vicious.register(datewidget, vicious.widgets.date, "%H:%M:%S %d/%m/%Y ", 1)
+
+-- CPU
+
+require("cpu")
 
 -- Sound
 
-volwidget = wibox.widget.textbox()
-vicious.register(volwidget, vicious.widgets.volume,
-                 '<span>$2 $1%</span>',
-                 0.2, "Master")
-
-volwidget:buttons(awful.util.table.join(
-                     awful.button({ }, 1,
-                                  function ()
-                                     awful.util.spawn("amixer -q sset Master 100")
-                                  end),
-                     awful.button({ }, 3,
-                                  function ()
-                                     awful.util.spawn("amixer -q sset Master 0")
-                                  end),
-                     awful.button({ }, 4,
-                                  function ()
-                                     awful.util.spawn("amixer -q sset Master 1+")
-                                  end),
-                     awful.button({ }, 5,
-                                  function ()
-                                     awful.util.spawn("amixer -q sset Master 1-")
-                                  end),
-                     awful.button({ "Shift" }, 4,
-                                  function ()
-                                     awful.util.spawn("amixer -q sset Master 5+")
-                                  end),
-                     awful.button({ "Shift" }, 5,
-                                  function ()
-                                     awful.util.spawn("amixer -q sset Master 5-")
-                                  end)))
+require("volume")
 
 -- Battery
-batwidget = wibox.widget.textbox()
-vicious.register(batwidget, vicious.widgets.bat, "<span>$1 $2% $3s</span>", 1, "BAT0")
+
+require("battery")
 
 separator = wibox.widget.textbox()
-separator.text  = " :: "
+separator.text  = " : "
 
 
 --------------------------------------------- /CUSTOM ------------------
@@ -284,13 +255,13 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.widget.systray(),
 ----------------------------------------------- CUSTOM -------------------
 
-            batwidget,
+            battery_widget,
             separator,
-            volwidget,
+            volume_widget,
             separator,
             memwidget,
             separator,
-            cpuwidget,
+            cpu_widget,
             separator,
             datewidget,
 
