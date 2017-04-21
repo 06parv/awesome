@@ -3,7 +3,7 @@ local wibox = require("wibox")
 local vicious = require("vicious")
 
 
-cpuwidget = awful.widget.graph()
+cpuwidget = wibox.widget.graph()
 cpuwidget:set_width(50)
 cpuwidget:set_background_color("#494B4F")
 cpuwidget:set_color({

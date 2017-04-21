@@ -184,11 +184,10 @@ screen.connect_signal("property::geometry", set_wallpaper)
 
 --------------------------------------------- CUSTOM -------------------
 
--- Initialize widget
-memwidget = wibox.widget.textbox()
--- Register widget
-vicious.register(memwidget, vicious.widgets.mem, " RAM: $2MB")
+-- Memory
 
+require("memory")
+require("swap")
 
 -- Date
 datewidget = wibox.widget.textbox()
@@ -209,6 +208,8 @@ require("battery")
 separator = wibox.widget.textbox()
 separator.text  = " : "
 
+small_separator = wibox.widget.textbox()
+small_separator.text = " "
 
 --------------------------------------------- /CUSTOM ------------------
 
@@ -259,7 +260,9 @@ awful.screen.connect_for_each_screen(function(s)
             separator,
             volume_widget,
             separator,
-            memwidget,
+            mem_widget,
+	    small_separator,
+	    swap_widget,
             separator,
             cpu_widget,
             separator,
