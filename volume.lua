@@ -33,6 +33,9 @@ volume_widget:connect_signal("button::press", function(_,_,_,button)
     end
 end)
 
+volume_popup = awful.tooltip({objects = {volume_widget}})
+
+
 watch(
     'amixer -D pulse sget Master', 1,
     function(widget, stdout, stderr, reason, exit_code)   
@@ -47,6 +50,7 @@ watch(
 		elseif (volume >= 75 and volume <= 100) then volume_icon_name="audio-volume-high-symbolic"
 		end
         widget.image = path_to_icons .. volume_icon_name .. ".svg"
+	volume_popup.text = volume .. "%"
     end,
     volume_widget
 )

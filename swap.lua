@@ -20,3 +20,6 @@ vicious.register(swapwidget, vicious.widgets.mem, "$5", 7)
 
 
 swap_widget = wibox.container.mirror(swapwidget, {horizontal = true})
+
+swap_tooltip = awful.tooltip({objects = {swap_widget}})
+vicious.register(swap_tooltip, vicious.widgets.mem, "SWAP: $6MB", 7)

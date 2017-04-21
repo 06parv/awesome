@@ -20,3 +20,6 @@ vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 3)
 
 
 cpu_widget = wibox.container.mirror(cpuwidget, {horizontal = true})
+
+cpu_tooltip = awful.tooltip({objects = {cpu_widget}})
+vicious.register(cpu_tooltip, vicious.widgets.mem, "CPU: $1%", i)

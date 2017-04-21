@@ -18,5 +18,8 @@ memwidget:set_color({
 })
 vicious.register(memwidget, vicious.widgets.mem, "$1", 5)
 
-
 mem_widget = wibox.container.mirror(memwidget, {horizontal = true})
+
+mem_tooltip = awful.tooltip({objects = {mem_widget}})
+vicious.register(mem_tooltip, vicious.widgets.mem, "RAM: $2MB", 5)
+
