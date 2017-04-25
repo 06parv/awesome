@@ -184,6 +184,8 @@ screen.connect_signal("property::geometry", set_wallpaper)
 
 --------------------------------------------- CUSTOM -------------------
 
+require("weather")
+
 -- Memory
 
 require("memory")
@@ -256,6 +258,9 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.widget.systray(),
 ----------------------------------------------- CUSTOM -------------------
 
+	    separator,
+	    weather_widget,
+	    separator,
             battery_widget,
             separator,
             volume_widget,
