@@ -1,6 +1,6 @@
 [submodule "vicious"]
 	path = vicious
-	url = ./vicious
+	url = https://github.com/Mic92/vicious.git
 [submodule "arc-icon-theme"]
 	path = arc-icon-theme
-	url = ./arc-icon-theme
+	url = https://github.com/horst3180/arc-icon-theme.git
