@@ -192,8 +192,7 @@ require("memory")
 require("swap")
 
 -- Date
-datewidget = wibox.widget.textbox()
-vicious.register(datewidget, vicious.widgets.date, "%H:%M:%S %d/%m/%Y ", 1)
+require("date")
 
 -- CPU
 
@@ -271,7 +270,7 @@ awful.screen.connect_for_each_screen(function(s)
             separator,
             cpu_widget,
             separator,
-            datewidget,
+            date_widget,
 
 ----------------------------------------------- /CUSTOM ------------------
             -- mytextclock,
@@ -420,7 +419,9 @@ clientkeys = awful.util.table.join(
             c:raise()
         end ,
         {description = "maximize", group = "client"}),
-    awful.key({ modkey }, "F12", function () awful.util.spawn("xflock4") end)
+--    awful.key({ modkey }, "F12", function () awful.util.spawn("xflock4") end)
+--    awful.key({ modkey }, "F12", function () awful.util.spawn("dm-tool lock") end)
+    awful.key({ modkey }, "F12", function () awful.util.spawn("xscreensaver-command -lock") end)
 )
 
 -- Bind all key numbers to tags.

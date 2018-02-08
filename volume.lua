@@ -26,8 +26,10 @@ volume_widget = wibox.widget {
 volume_widget:connect_signal("button::press", function(_,_,_,button)
     if (button == 4) then
         awful.spawn("amixer -D pulse sset Master 5%+", false)
+        awful.spawn("amixer sset Headphone 100%", false)
     elseif (button == 5) then
         awful.spawn("amixer -D pulse sset Master 5%-", false)
+        awful.spawn("amixer sset Headphone 100%", false)
     elseif (button == 1) then
         awful.spawn("amixer -D pulse sset Master toggle", false)
     end
