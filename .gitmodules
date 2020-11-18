@@ -4,3 +4,6 @@
 [submodule "arc-icon-theme"]
 	path = arc-icon-theme
 	url = https://github.com/horst3180/arc-icon-theme.git
+[submodule "awesome-wm-widgets"]
+	path = awesome-wm-widgets
+	url = https://github.com/streetturtle/awesome-wm-widgets.git

@@ -184,7 +184,9 @@ screen.connect_signal("property::geometry", set_wallpaper)
 
 --------------------------------------------- CUSTOM -------------------
 
-require("weather")
+-- Weather
+
+local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
 
 -- Memory
 
@@ -196,15 +198,27 @@ require("date")
 
 -- CPU
 
-require("cpu")
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 
 -- Sound
 
-require("volume")
+local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
 
 -- Battery
 
-require("battery")
+local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
+
+-- Calendar
+local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+local cw = calendar_widget({
+    placement = 'top_right',
+})
+date_widget:connect_signal("button::press",
+    function(_, _, _, button)
+        if button == 1 then cw.toggle() end
+    end
+)
+
 
 separator = wibox.widget.textbox()
 separator.text  = " : "
@@ -258,17 +272,27 @@ awful.screen.connect_for_each_screen(function(s)
 ----------------------------------------------- CUSTOM -------------------
 
 	    separator,
-	    weather_widget,
+	    weather_widget({
+                api_key='79c5694d10214f6452bae47ad29fb4c2',
+                coordinates = {47.3294616, -1.8618616},
+                show_hourly_forecast = true,
+                show_daily_forecast = true,
+            }),
 	    separator,
-            battery_widget,
+            battery_widget({
+                path_to_icons = "/home/gagaro/.config/awesome/arc-icon-theme/Arc/status/symbolic/",
+	    }),
             separator,
-            volume_widget,
+            volumearc_widget({
+                mute_color = '#ff0000',
+		path_to_icon = "/home/gagaro/.config/awesome/arc-icon-theme/Arc/status/symbolic/audio-volume-muted-symbolic.svg",
+            }),
             separator,
             mem_widget,
 	    small_separator,
 	    swap_widget,
             separator,
-            cpu_widget,
+            cpu_widget(),
             separator,
             date_widget,
 
@@ -419,9 +443,9 @@ clientkeys = awful.util.table.join(
             c:raise()
         end ,
         {description = "maximize", group = "client"}),
---    awful.key({ modkey }, "F12", function () awful.util.spawn("xflock4") end)
+    awful.key({ modkey }, "F12", function () awful.util.spawn("xflock4") end)
 --    awful.key({ modkey }, "F12", function () awful.util.spawn("dm-tool lock") end)
-    awful.key({ modkey }, "F12", function () awful.util.spawn("xscreensaver-command -lock") end)
+--    awful.key({ modkey }, "F12", function () awful.util.spawn("xscreensaver-command -lock") end)
 )
 
 -- Bind all key numbers to tags.
